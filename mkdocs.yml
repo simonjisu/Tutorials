@@ -39,6 +39,13 @@ markdown_extensions:
       emoji_generator: !!python/name:materialx.emoji.to_svg
   - admonition
   - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 extra_javascript:
   - javascripts/mathjax.js
@@ -47,13 +54,15 @@ extra_javascript:
 
 plugins:
   - tags:
-      tags_file: index.md
+     tags_file: index.md
   - search
   - section-index
+  - mkdocs-jupyter:
+      execute: True
+      ignore_h1_titles: True
   - literate-nav:
       nav_file: SUMMARY.md
       implicit_index: false
-
 extra:
   social:
     - icon: fontawesome/brands/github 
@@ -61,5 +70,3 @@ extra:
   analytics:
     provider: google
     property: G-3PRN7HGSG5
-extra_css:
-  - stylesheets/extra.css

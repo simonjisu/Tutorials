@@ -9,6 +9,8 @@ mkdocs-material = "*"
 mkdocs-literate-nav = "*"
 mkdocs-section-index = "*"
 colorama = "*"
+mkdocs-jupyter = "*"
+ipykernel = "*"
 
 [dev-packages]
 
