@@ -7,4 +7,4 @@ hide:
 
 | Date | Docs |
 |---|---|
-|`2022.07.20`| |
+|`2022.08.29`| [Steiner Tree Problem](./08-29-steiner_tree.md) |

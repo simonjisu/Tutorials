@@ -4,3 +4,4 @@
 * [수학적 최적화](mathoptim/index.md)
     * [Chapter 1](mathoptim/chapter1.md)
     * [Chapter 2](mathoptim/chapter2.md)
+* [GraphQL](graphql/index.md)
