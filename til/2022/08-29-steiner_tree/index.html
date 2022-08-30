@@ -15,7 +15,7 @@
     
     
       
-        <title>Steiner Tree Problem - Soopace - Tutorials</title>
+        <title>08.29 Steiner Tree Problem - Soopace - Tutorials</title>
       
     
     
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Steiner Tree Problem
+              08.29 Steiner Tree Problem
             
           </span>
         </div>
@@ -365,6 +365,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../08-28-disjointset/" class="md-nav__link">
+        08.28 Disjoint Set and Union-find
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -373,14 +387,16 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Steiner Tree Problem
+          08.29 Steiner Tree Problem
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Steiner Tree Problem
+        08.29 Steiner Tree Problem
       </a>
       
         
@@ -389,19 +405,14 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#steiner-tree-problem" class="md-nav__link">
-    Steiner Tree Problem
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#problem-definition-minimum-spanning-tree" class="md-nav__link">
@@ -419,8 +430,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#kruskal-mst" class="md-nav__link">
-    Kruskal MST
+  <a href="#kruskal" class="md-nav__link">
+    Kruskal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prim" class="md-nav__link">
+    Prim
   </a>
   
 </li>
@@ -554,19 +572,14 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#steiner-tree-problem" class="md-nav__link">
-    Steiner Tree Problem
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#problem-definition-minimum-spanning-tree" class="md-nav__link">
@@ -584,8 +597,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#kruskal-mst" class="md-nav__link">
-    Kruskal MST
+  <a href="#kruskal" class="md-nav__link">
+    Kruskal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prim" class="md-nav__link">
+    Prim
   </a>
   
 </li>
@@ -629,9 +649,7 @@
 
 
 
-  <h1>Steiner Tree Problem</h1>
-
-<h2 id="steiner-tree-problem">Steiner Tree Problem<a class="headerlink" href="#steiner-tree-problem" title="Permanent link">&para;</a></h2>
+<h1 id="steiner-tree-problem">Steiner Tree Problem<a class="headerlink" href="#steiner-tree-problem" title="Permanent link">&para;</a></h1>
 <p>Steiner tree problem 혹은 minimum Steiner tree problem은 조합의 최적화 문제의 한 종류를 말한다<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. 여러 설정이 있지만, 보통은 그래프에서 정의하는 최소 스패닝 트리(minimum spanning tree, MST) 문제를 자주 사용한다.</p>
 <h2 id="problem-definition-minimum-spanning-tree">Problem Definition: Minimum Spanning Tree<a class="headerlink" href="#problem-definition-minimum-spanning-tree" title="Permanent link">&para;</a></h2>
 <p>최소 스패닝 트리(Minimum Spanning Tree, MST)<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>는 그래프 내에서 모든 점(vertices)를 가능한 최소 총 간선(edge) 가중치로 연결하는 무방향 그래프의 부분 집합이다. 예를 들어 다음과 같은 그래프 <span class="arithmatex">\(G(V=6, E=9)\)</span> 에서, </p>
@@ -649,127 +667,100 @@
   a2((2)) --- |2| a3
   a3 --- |6| a4((4)) --- |8| a6((6))
   a4 --- |3| a5((5)) </code></pre>
-<details class="note">
-<summary>Code for graph drawing using Networkx</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">nv</span> <span class="o">=</span> <span class="mi">6</span> <span class="c1"># number of vertices</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">ne</span> <span class="o">=</span> <span class="mi">9</span> <span class="c1"># number of edges</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">11</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">]]</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="k">for</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>  <span class="c1"># positions for all nodes - seed for reproducibility</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#74b3ed&#39;</span><span class="p">],</span> <span class="n">edgecolors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#000000&#39;</span><span class="p">])</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="n">edge_labels</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">)</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edge_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edge_labels</span><span class="p">)</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_labels</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-</code></pre></div>
-</details>
 <h2 id="algorithms">Algorithms<a class="headerlink" href="#algorithms" title="Permanent link">&para;</a></h2>
-<h3 id="kruskal-mst">Kruskal MST<a class="headerlink" href="#kruskal-mst" title="Permanent link">&para;</a></h3>
-<p>탐욕적인(greedy) 방법을 사용하여 네트워크의 모든 정점을 최소 비용으로 연결하는 최적 해답을 구하는 방법이다. MST의 조건 (1) 최소 비용을 가지는 edge로 구성 (2) 무방향 비순환((nondirect acyclic) 에 맞춰 최소 비용을 가지는 edge를 매 스탭에서 선택하게 된다.</p>
+<p>탐욕적인(greedy) 방법을 사용하여 네트워크의 모든 정점을 최소 비용으로 연결하는 최적 해답을 구하는 <strong>Kruskal</strong>과 <strong>Prim</strong> 알고리즘이 있다.</p>
+<h3 id="kruskal">Kruskal<a class="headerlink" href="#kruskal" title="Permanent link">&para;</a></h3>
+<p>MST의 조건 (1) 최소 비용을 가지는 edge로 모든 노드가 연결되고 (2) 무방향 비순환(nondirect acyclic) 에 맞춰 최소 비용을 가지는 edge를 매 스탭에서 선택하게 된다. Union-find 자료구조를 사용하여 같은 서로소 집합이 아닌 경우에 edge를 선택하고, 사이클 형성 여부를 확인한다.</p>
 <div class="admonition cite">
-<p class="admonition-title">Pseudocode<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup></p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
-<span class="normal"><a href="#__codelineno-1-2">2</a></span>
-<span class="normal"><a href="#__codelineno-1-3">3</a></span>
-<span class="normal"><a href="#__codelineno-1-4">4</a></span>
-<span class="normal"><a href="#__codelineno-1-5">5</a></span>
-<span class="normal"><a href="#__codelineno-1-6">6</a></span>
-<span class="normal"><a href="#__codelineno-1-7">7</a></span>
-<span class="normal"><a href="#__codelineno-1-8">8</a></span>
-<span class="normal"><a href="#__codelineno-1-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>algorithm Kruskal(G) is
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a>    F:= ∅
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a>    for each v ∈ G.V do
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a>        MAKE-SET(v)
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a>    for each (u, v) in G.E ordered by weight(u, v), increasing do
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a>        if FIND-SET(u) ≠ FIND-SET(v) then
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a>            F:= F ∪ {(u, v)} ∪ {(v, u)}
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="hll">            UNION(FIND-SET(u), FIND-SET(v))
-</span><a id="__codelineno-1-9" name="__codelineno-1-9"></a>    return F
+<p class="admonition-title">Pseudocode<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span>
+<span class="normal"><a href="#__codelineno-0-8">8</a></span>
+<span class="normal"><a href="#__codelineno-0-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>algorithm Kruskal(G) is
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>    F:= ∅
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>    for each v ∈ G.V do
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>        MAKE-SET(v)
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>    for each (u, v) in G.E ordered by weight(u, v), increasing do
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>        if FIND-SET(u) ≠ FIND-SET(v) then
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>            F:= F ∪ {(u, v)} ∪ {(v, u)}
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="hll">            UNION(FIND-SET(u), FIND-SET(v))
+</span><a id="__codelineno-0-9" name="__codelineno-0-9"></a>    return F
 </code></pre></div></td></tr></table></div>
 <ul>
-<li>Disjoint Set는 수학에서 중복 되지 않는 부분 집합이며, 자료구조로는 Tree형태로 구현한다<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup><sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup>.</li>
+<li>Disjoint Set 자료구조는 <a href="../08-28-disjointset/">Disjoint Set and Union-find</a> 글을 참고</li>
 <li>8번 라인의 코드에서 사이클 형성 여부를 확인한다.</li>
 </ul>
 </div>
-<details class="note">
-<summary>Code for MST</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">class</span> <span class="nc">DisjointSet</span><span class="p">():</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="p">{}</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">def</span> <span class="nf">make_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="c1"># if x is root, since the root equal to index</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="c1"># return x</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">:</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>            <span class="k">return</span> <span class="n">x</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>        <span class="c1"># recursively find index</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>    <span class="k">def</span> <span class="nf">union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>        <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;{&#39;</span>
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>            <span class="n">s</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s1">&#39;</span>
-<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>                <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;, &#39;</span>
-<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>        <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;}&#39;</span>
-<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>        <span class="k">return</span> <span class="n">s</span>
-<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>
-<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="k">def</span> <span class="nf">Kruskal</span><span class="p">(</span><span class="n">G</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>    <span class="n">F</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>    <span class="n">disjoint_set</span> <span class="o">=</span> <span class="n">DisjointSet</span><span class="p">()</span>
-<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>    <span class="n">disjoint_set</span><span class="o">.</span><span class="n">make_set</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>  <span class="c1"># MAKE-SET</span>
-<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>
-<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>    <span class="c1"># Sort edges &amp; weights in ascending order</span>
-<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>    <span class="n">edges_weights</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">)</span>  <span class="c1"># return as dictionary</span>
-<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>    <span class="n">sorted_edges_weights</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">edges_weights</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="p">((</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="n">w</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sorted_edges_weights</span><span class="p">):</span>
-<a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[Step </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">]</span><span class="se">\n</span><span class="s1">FIND-SET(u)=</span><span class="si">{</span><span class="n">disjoint_set</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">u</span><span class="p">)</span><span class="si">}</span><span class="s1"> FIND-SET(u)=</span><span class="si">{</span><span class="n">disjoint_set</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">}</span><span class="s1"> weight=</span><span class="si">{</span><span class="n">w</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>        <span class="c1"># UNION-FIND</span>
-<a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>        <span class="k">if</span> <span class="n">disjoint_set</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="o">!=</span> <span class="n">disjoint_set</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
-<a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>            <span class="n">F</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">union</span><span class="p">({(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)})</span><span class="o">.</span><span class="n">union</span><span class="p">({(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">)})</span>
-<a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>            <span class="n">disjoint_set</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-<a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-<a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Disjoint Set&#39;</span><span class="p">)</span>
-<a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">disjoint_set</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>            <span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a>    <span class="k">return</span> <span class="n">F</span>
-</code></pre></div>
-</details>
-<p>구현한 코드의 결과를 보면 다음과 같이 최소 비용으로 연결하는 edge들을 찾아낸다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">)}</span>
-</code></pre></div>
+<p>코드로 구현하면 다음과 같다.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span>
+<span class="normal"><a href="#__codelineno-1-24">24</a></span>
+<span class="normal"><a href="#__codelineno-1-25">25</a></span>
+<span class="normal"><a href="#__codelineno-1-26">26</a></span>
+<span class="normal"><a href="#__codelineno-1-27">27</a></span>
+<span class="normal"><a href="#__codelineno-1-28">28</a></span>
+<span class="normal"><a href="#__codelineno-1-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="k">def</span> <span class="nf">Kruskal</span><span class="p">(</span><span class="n">G</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">):</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="sd">    algorithm Kruskal(G) is</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="sd">        F:= ∅</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="sd">        for each v ∈ G.V do</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="sd">            MAKE-SET(v)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="sd">        for each (u, v) in G.E ordered by weight(u, v), increasing do</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="sd">            if FIND-SET(u) ≠ FIND-SET(v) then</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="sd">                F:= F U {(u, v)} U {(v, u)}</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="sd">                UNION(FIND-SET(u), FIND-SET(v))</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="sd">        return F</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a>    <span class="n">F</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a>    <span class="n">disjoint_set</span> <span class="o">=</span> <span class="n">DisjointSet</span><span class="p">()</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a>    <span class="n">disjoint_set</span><span class="o">.</span><span class="n">make_set</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>  <span class="c1"># MAKE-SET</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a>
+<a id="__codelineno-1-17" name="__codelineno-1-17"></a>    <span class="c1"># Sort edges &amp; weights in ascending order</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18"></a>    <span class="n">edges_weights</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">get_edge_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">)</span>  <span class="c1"># return as Dict[tuple, int]</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19"></a>    <span class="n">sorted_edges_weights</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">edges_weights</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20"></a>
+<a id="__codelineno-1-21" name="__codelineno-1-21"></a>    <span class="c1"># Union-Find Algorithm </span>
+<a id="__codelineno-1-22" name="__codelineno-1-22"></a>    <span class="k">for</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">sorted_edges_weights</span><span class="p">:</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23"></a>        <span class="k">if</span> <span class="n">disjoint_set</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="o">!=</span> <span class="n">disjoint_set</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24"></a>            <span class="n">F</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">union</span><span class="p">({(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)})</span><span class="o">.</span><span class="n">union</span><span class="p">({(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">w</span><span class="p">)})</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25"></a>            <span class="n">disjoint_set</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26"></a>
+<a id="__codelineno-1-27" name="__codelineno-1-27"></a>            <span class="c1"># +) Spanning Tree 정의상 최대 N-1개의 edge가 있으므로 </span>
+<a id="__codelineno-1-28" name="__codelineno-1-28"></a>            <span class="c1"># 해당 조건에 맞춰 break 걸 수도 있다.</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29"></a>    <span class="k">return</span> <span class="n">F</span><span class="p">,</span> <span class="n">disjoint_set</span>
+</code></pre></div></td></tr></table></div>
+<p>구현한 코드의 결과를 보면 다음과 같이 최소 비용으로 연결하는 edge들을 찾아낸다. 아래 그림은 Union-Find 알고리즘에서 각 스텝 별로 최소 비용을 담는 edge들의 집합 <code>F</code>가 어떻게 결합이 되는지 알 수 있다.</p>
+<p><img alt="disjointset" src="../img/08-29-graph_F.gif" /></p>
+<p>아래 그림은 Union-Find 알고리즘에서 각 스텝 별로 disjoint set 가 어떻게 결합이 되여 사이클의 형성 여부를 확인 할 수 있다.</p>
+<p><img alt="disjointset" src="../img/08-29-graph_with_dis_set.gif" /></p>
+<h3 id="prim">Prim<a class="headerlink" href="#prim" title="Permanent link">&para;</a></h3>
+<p>시작 vertex을 선택한 후에 인접한 edges중 최소 비용을 가지는 edge를 연결된 vertex를 지속적으로 선택하는 알고리즘이다.</p>
 <div class="footnote">
 <hr />
 <ol>
@@ -780,16 +771,13 @@
 <p><a href="https://en.wikipedia.org/wiki/Minimum_spanning_tree">Minimum spanning tree</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 <li id="fn:3">
-<p><a href="https://gmlwjd9405.github.io/2018/08/28/algorithm-mst.html">gmlwjd9405 - 최소 신장 트리(MST, Minimum Spanning Tree)란</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Kruskal%27s_algorithm">Kruskal's algorithm</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
 </li>
 <li id="fn:4">
-<p><a href="https://en.wikipedia.org/wiki/Kruskal%27s_algorithm">Kruskal's algorithm</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Prim%27s_algorithm">Prim's algorithm</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
 </li>
-<li id="fn:5">
-<p><a href="https://en.wikipedia.org/wiki/Disjoint-set_data_structure">Disjoint-set data structure</a>&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
-</li>
-<li id="fn:6">
-<p><a href="https://gazelle-and-cs.tistory.com/65">슈타이너 트리 2-근사 알고리즘</a>&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+<li id="fn:8">
+<p><a href="https://gazelle-and-cs.tistory.com/65">슈타이너 트리 2-근사 알고리즘</a>&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 5 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -865,7 +853,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: 2022" rel="prev">
+        <a href="../08-28-disjointset/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 08.28 Disjoint Set and Union-find" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -874,7 +862,7 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              2022
+              08.28 Disjoint Set and Union-find
             </div>
           </div>
         </a>
