@@ -18,7 +18,7 @@ $$\begin{aligned}
 \mathbf{b} &= \begin{bmatrix} b_{1} \\ \vdots \\ b_m \end{bmatrix} \in \Bbb{R}^m, \mathbf{c} = \begin{bmatrix} c_{1} \\ \vdots \\ c_n \end{bmatrix} \in \Bbb{R}^n , \mathbf{x} = \begin{bmatrix} x_{1} \\ \vdots \\ x_n \end{bmatrix} \in \Bbb{R}^n
 \end{aligned}$$
 
-
+## 1.2 예시
 
 ### 운송 계획 문제
 
@@ -82,3 +82,10 @@ flowchart LR;
     & s_{j0} = 0, \quad x_{jt}, s_{jt} \geq 0 \\
     & i = 1, \dots, m, \quad j = 1, \dots, n, \quad t = 1, \dots, T
     \end{aligned}$$
+
+## 1.2 볼록한 비선형 함수의 근사
+
+* 분리가 가능한 볼록한 비선형 함수의 최소화 = 선형 문제로 근사 가능
+* 아래와 같은 함수를 분리 가능한 함수라고 함
+
+    $$ \begin{aligned} \arg \min\  & \sum_{j=1}^n f_j(x_j) \end{aligned}$$
