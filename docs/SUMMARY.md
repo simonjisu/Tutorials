@@ -6,3 +6,5 @@
     * [Chapter 2](mathoptim/chapter2.md)
 * [GraphQL](graphql/index.md)
     * [Chapter 1](graphql/chapter1.md)
+* [Kafka](kafka/index.md)
+    * [Chapter 1](kafka/chapter1.md)
