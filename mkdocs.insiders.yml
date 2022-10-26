@@ -1,0 +1,5 @@
+INHERIT: mkdocs.yml
+plugins:
+  - blog:
+      blog_dir: studies
+      post_date_format: medium

@@ -3,7 +3,7 @@ title: "08.28 Disjoint Set and Union-find"
 hide:
   - tags
 tags:
-  - TIL
+  - Data Structure and Algorithms
 ---
 
 # Disjoint Set and Union-find

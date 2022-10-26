@@ -3,7 +3,7 @@ title: "08.29 Steiner Tree Problem"
 hide:
   - tags
 tags:
-  - TIL
+  - Data Structure and Algorithms
 ---
 
 # Steiner Tree Problem

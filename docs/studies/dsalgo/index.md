@@ -3,7 +3,9 @@ hide:
   - toc
 ---
 
-# Table of Contents
+# Data Structure and Algorithms
+
+## Table of Contents
 
 | Date | Docs |
 |---|---|

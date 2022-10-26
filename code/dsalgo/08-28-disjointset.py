@@ -113,8 +113,6 @@ class DisjointSetEfficient(DisjointSetBase):
             if self.rank[x_parent] == self.rank[y_parent]:
                 self.rank[x_parent] += 1
 
-
-
 def run_example1(x, unions, ds_class, path_compression=False):
     if path_compression:
         assert ds_class == DisjointSetPathCompress, 'must be `DisjointSetPathCompress` class'

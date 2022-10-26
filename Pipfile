@@ -4,12 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-mkdocs = "*"
 mkdocs-material = "*"
 mkdocs-literate-nav = "*"
 mkdocs-section-index = "*"
 colorama = "*"
-ipykernel = "*"
 
 [dev-packages]
 networkx = "*"
@@ -17,6 +15,8 @@ numpy = "*"
 pandas = "*"
 matplotlib = "*"
 scipy = "*"
+scikit-learn = "*"
+ipykernel = "*"
 
 [requires]
 python_version = "3.10"
